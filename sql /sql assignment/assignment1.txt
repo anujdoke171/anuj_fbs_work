@@ -1,0 +1,122 @@
+q1.  Login to MySQL and view all databases already present. You should get
+following result :
+              show databases;
++--------------------+
+| Database           |
++--------------------+
+| company4           |
+| information_schema |
+| june16             |
+| mayjune25          |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+
+
+q2.  Write an SQL statement to create a simple table countries including columns
+country_id,country_name and region_id. After this display the structure of
+table as below :
+ans= create table countries
+    -> (country_id int,
+    -> country_name varchar(20),
+    -> region_id int);
+
+
+3.  Write an SQL statement to create a table named jobs including columns
+job_id, job_title, min_salary, max_salary and check whether the
+max_salary amount exceeding the upper limit 25000. Also set job_id as
+primary key and entering null values for job_title is not allowed.
+
+create table jobs
+    -> (job_id int,job_title varchar(20),min_salary double(7,2),
+    -> max_salary double(7,2));
+
+ alter table jobs
+    -> modify column max_salary double check (max_salary<=25000);
+
+ alter table jobs
+    -> add primary key (job_id);
+
+
+q4.Write a SQL statement to create a table named job_histry including columns
+employee_id, start_date, end_date, job_id and department_id
+                   
+      use mayjune25;
+
+      create table job_history
+    -> (employee_id int,
+    -> start_date date,end_date date,
+    -> job_id int,department_id int);
+
+      +---------------+------+------+-----+---------+-------+
+| Field         | Type | Null | Key | Default | Extra |
++---------------+------+------+-----+---------+-------+
+| employee_id   | int  | YES  |     | NULL    |       |
+| start_date    | date | YES  |     | NULL    |       |
+| end_date      | date | YES  |     | NULL    |       |
+| job_id        | int  | YES  |     | NULL    |       |
+| department_id | int  | YES  |     | NULL    |       |
++---------------+------+------+-----+---------+-------+
+
+5.  Write an SQL statement to alter a table named countries to make sure that no
+duplicate data against column country_id will be allowed at the time of
+insertion.
+
+        alter table countries
+    -> modify country_id int unique;
+
+       desc countries;
+
+      +--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| country_id   | int         | YES  | UNI | NULL    |       |
+| country_name | varchar(20) | YES  |     | NULL    |       |
+| region_id    | int         | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+                
+
+
+q6.  Write an SQL statement to create a table named jobs including columns job_id,
+job_title, min_salary and max_salary, and make sure that, the default value
+for job_title is blank and min_salary is 8000 and max_salary is NULL will be
+entered automatically at the time of insertion if no value assigned for the
+specified columns.
+
+create table job
+    -> (job_id int primary key,
+    -> job_title varchar(20) default '',
+    -> min_salary double(10,2) default 8000,
+    -> max_salary double(10,2) default null);
+  
+          desc jobs;
+
+     +------------+---------------+------+-----+---------+-------+
+| Field      | Type          | Null | Key | Default | Extra |
++------------+---------------+------+-----+---------+-------+
+| job_id     | int           | NO   | PRI | NULL    |       |
+| job_title  | varchar(20)   | YES  |     |         |       |
+| min_salary | decimal(10,2) | YES  |     | 8000.00 |       |
+| max_salary | decimal(10,2) | YES  |     | NULL    |       |
++------------+---------------+------+-----+---------+-------+
+ 
+
+q7 Create a Department table with following structure
+
+
+mysql> CREATE TABLE departmeantt (
+    -> departmeant_id decimal(4,0) default (0),
+    -> departmeant_name varchar(20),
+    -> manager_id decimal(6,0) default(0),
+    -> location_id decimal(4,0) default null,
+    -> primary key (departmeant_id,manager_id));
+
+mysql> desc departmeantt;
++------------------+--------------+------+-----+---------+-------------------+
+| Field            | Type         | Null | Key | Default | Extra             |
++------------------+--------------+------+-----+---------+-------------------+
+| departmeant_id   | decimal(4,0) | NO   | PRI | 0       | DEFAULT_GENERATED |
+| departmeant_name | varchar(20)  | YES  |     | NULL    |                   |
+| manager_id       | decimal(6,0) | NO   | PRI | 0       | DEFAULT_GENERATED |
+| location_id      | decimal(4,0) | YES  |     | NULL    |                   |
++------------------+--------------+------+-----+---------+-------------------+
